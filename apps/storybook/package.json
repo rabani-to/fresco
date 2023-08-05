@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "storybook dev -p 6066",
-    "build": "storybook build --docs",
+    "build": "storybook build",
     "clean": "rm -rf .turbo && rm -rf node_modules"
   },
   "dependencies": {

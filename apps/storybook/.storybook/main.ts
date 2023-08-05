@@ -23,6 +23,10 @@ const config: StorybookConfig = {
             find: "@radish-la/fresco",
             replacement: resolve(__dirname, "../../../packages/fresco/src/"),
           },
+          {
+            find: "@/config",
+            replacement: resolve(__dirname, "../config/"),
+          },
         ],
       },
     }

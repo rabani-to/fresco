@@ -7,7 +7,8 @@
     "baseUrl": "./",
     "paths": {
       "@radish-la/fresco": ["../../packages/fresco/src/index.tsx"],
-      "@radish-la/fresco/*": ["../../packages/fresco/src/*"]
+      "@radish-la/fresco/*": ["../../packages/fresco/src/*"],
+      "@/config/*": ["./config/*"]
     }
   },
   "include": ["stories", "./.storybook/*.tsx"]
