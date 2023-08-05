@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --no-cache --continue",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean && rm -rf node_modules package-lock.json",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "eslint": "^8.29.0",
+    "prettier": "^2.8.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "turbo": "latest"
+  },
+  "packageManager": "npm@8.11.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
