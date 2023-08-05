@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "paths": {
+      "@radish-la/fresco": ["../../packages/fresco/src/index.tsx"],
+      "@radish-la/fresco/*": ["../../packages/fresco/src/*"]
+    }
+  },
+  "include": ["stories", "./.storybook/*.tsx"]
+}

@@ -5,6 +5,7 @@ const config: StorybookConfig = {
   stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(ts|tsx)"],
   addons: [
     "@storybook/addon-links",
+    "@storybook/addon-styling",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
   ],
@@ -15,6 +16,7 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     return {
       ...config,
+      define: { "process.env": {} },
       resolve: {
         alias: [
           {
