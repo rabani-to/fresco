@@ -1,4 +1,3 @@
-import { resolve } from "path"
 import { defineConfig } from "vite"
 import packageJson from "./package.json"
 
@@ -6,21 +5,29 @@ export default defineConfig({
   build: {
     target: "esnext",
     lib: {
-      formats: ["es", "umd"],
       name: packageJson.name,
-      fileName: (format) => `index.${format}.js`,
-      entry: resolve(__dirname, "./src/index.tsx"),
+      formats: ["es"],
+      entry: ["./src/index.tsx", "./src/atoms/index.tsx"],
     },
+    reportCompressedSize: true,
     minify: "esbuild",
     chunkSizeWarningLimit: 5,
     rollupOptions: {
       treeshake: true,
-      external: [...Object.keys(packageJson.peerDependencies)],
+      cache: true,
+      external: [
+        "react/jsx-runtime",
+        ...Object.keys(packageJson.peerDependencies),
+      ],
       output: {
-        banner: `"use client";`,
+        esModule: true,
         globals: {
           react: "React",
         },
+        banner: `"use client";`,
+        preserveModules: true,
+        preserveModulesRoot: "./src",
+        sourcemapExcludeSources: true,
         minifyInternalExports: true,
         compact: true,
       },
@@ -32,5 +39,6 @@ export default defineConfig({
     minifyIdentifiers: true,
     minifyWhitespace: true,
     treeShaking: true,
+    ignoreAnnotations: true,
   },
 })

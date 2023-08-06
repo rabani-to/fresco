@@ -11,5 +11,6 @@
       "@/config/*": ["./config/*"]
     }
   },
-  "include": ["stories", "./.storybook/*.tsx"]
+  "include": ["stories", "./.storybook/*.tsx"],
+  "exclude": [".turbo", "dist", "node_modules"]
 }
