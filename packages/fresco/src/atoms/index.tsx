@@ -74,6 +74,7 @@ export function FrescoAtomsConfig({
 }: PropsWithChildren<{
   defaults?: DefaultFrescoAtomsConfig
 }>) {
+  console.debug({ defaults })
   return children as JSX.Element
 }
 
