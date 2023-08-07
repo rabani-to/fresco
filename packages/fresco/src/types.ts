@@ -1,5 +1,10 @@
 export type { PropsWithChildren } from "react"
 
+import type { useBalance, useContractRead } from "wagmi"
+
+export type useBalanceReturnType = ReturnType<typeof useBalance>
+export type useContractReadReturnType = ReturnType<typeof useContractRead>
+
 export type DefaultFrescoAtomsConfig = {
   ERC20?: Partial<{ token: string; decimals: number }>
   abi?: Array<string>
