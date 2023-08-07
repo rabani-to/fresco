@@ -2,7 +2,7 @@
   <img alt="gofres.co" src="./banner.png" />
 </a>
 
-## What's Fresco?
+## What is Fresco?
 
 Fresco is a [React](https://reactjs.org/) component libray for Ethereum.
 
