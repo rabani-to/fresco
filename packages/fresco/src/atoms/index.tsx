@@ -2,6 +2,7 @@ import type {
   FrescoReadConfig,
   DefaultFrescoAtomsConfig,
   PropsWithChildren,
+  useBalanceReturnType,
 } from "../types"
 import { useEffect } from "react"
 import { useAccount, useBalance, useContractRead } from "wagmi"
@@ -17,7 +18,7 @@ export const ERC20 = {
     onError,
     chainId,
     token,
-  }: FrescoReadConfig<ReturnType<typeof useBalance>["data"]>) {
+  }: FrescoReadConfig<useBalanceReturnType>) {
     const { address } = useAccount()
     const connectedAccount = account || address
 
