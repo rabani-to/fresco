@@ -1,5 +1,5 @@
 <a href="https://gofres.co">
-  <img alt="gofres.co" src="./banner.png" />
+  <img alt="https://gofres.co" src="https://raw.githubusercontent.com/rabani-to/fresco/master/packages/fresco/banner.png" />
 </a>
 
 ## What is Fresco?
@@ -28,7 +28,7 @@ yarn add @radish-la/fresco
 
 For full documentation, visit [gofres.co](https://gofres.co).
 
-### Try it out
+## Try it out
 
 You can see live components from our Storybook [fresco-storybook.vercel.app](https://fresco-storybook.vercel.app).
 

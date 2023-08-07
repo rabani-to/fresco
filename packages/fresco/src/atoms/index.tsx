@@ -18,7 +18,7 @@ export const ERC20 = {
     onError,
     chainId,
     token,
-  }: FrescoReadConfig<useBalanceReturnType>) {
+  }: FrescoReadConfig<useBalanceReturnType["data"]>) {
     const { address } = useAccount()
     const connectedAccount = account || address
 
