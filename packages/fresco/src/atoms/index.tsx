@@ -5,44 +5,86 @@ import type {
   useBalanceReturnType,
 } from "../types"
 import { useEffect } from "react"
-import { useAccount, useBalance, useContractRead } from "wagmi"
+import { useAccount, useBalance, useContractRead, useToken } from "wagmi"
+import { formatUnits } from "viem"
 
 export const ERC20 = {
   BalanceOf({
     account,
     children,
     enabled,
-    onChangeStatus,
     refetchInterval,
-    onDataFetched,
-    onError,
     chainId,
     token,
+    ...triggers
   }: FrescoReadConfig<useBalanceReturnType["data"]>) {
-    const { address } = useAccount()
-    const connectedAccount = account || address
+    const connectedAccount = useInternalAccount(account)
+    const result = useResultTriggers(
+      useBalance({
+        enabled,
+        watch: refetchInterval === "block",
+        address: connectedAccount,
+        token: token as any,
+        scopeKey: `BalanceOf.${token}.${account}.${chainId}`,
+        chainId,
+      }),
+      triggers
+    )
 
-    const result = useBalance({
-      enabled,
-      watch: refetchInterval === "block",
-      address: connectedAccount,
-      token: token as any,
-      scopeKey: `BalanceOf.${token}.${account}.${chainId}`,
+    return children(formatResult(result, (data) => data))
+  },
+  AllowanceOf({
+    account,
+    children,
+    enabled,
+    refetchInterval,
+    chainId,
+    token,
+    spender,
+    ...triggers
+  }: FrescoReadConfig<
+    useBalanceReturnType["data"],
+    {
+      spender: string
+    }
+  >) {
+    const connectedAccount = useInternalAccount(account)
+    const { data: tokenData } = useToken({
+      address: token,
       chainId,
     })
 
-    useResultTriggers(result, {
-      onChangeStatus,
-      onDataFetched,
-      onError,
-    })
+    const result = useResultTriggers(
+      useContractRead({
+        enabled,
+        watch: refetchInterval === "block",
+        account: connectedAccount,
+        address: token,
+        abi: [
+          // owner, spender
+          "function allowance(address, address) external view returns (uint256)",
+        ],
+        args: [connectedAccount, spender],
+        scopeKey: `AllowanceOf.${token}.${account}.${spender}.${chainId}`,
+        chainId,
+      }),
+      triggers
+    )
 
-    return children(formatResult(result))
+    return children(
+      formatResult(
+        result,
+        (data) =>
+          ({
+            decimals: tokenData?.decimals,
+            formatted: formatUnits(data || 0, tokenData?.decimals || 18),
+            symbol: tokenData?.symbol,
+            value: data || 0,
+          } as useBalanceReturnType["data"])
+      )
+    )
   },
 }
-
-// isConfirmed: met min confirmations
-// isFailedConfirm: invalid tx
 
 export function FrescoAtomsConfig({
   defaults,
@@ -50,16 +92,19 @@ export function FrescoAtomsConfig({
 }: PropsWithChildren<{
   defaults?: DefaultFrescoAtomsConfig
 }>) {
-  console.debug({ defaults })
+  console.debug({ defaults, MESSAGE: "feature not available yet" })
   return children as JSX.Element
 }
 
-function formatResult(result: ReturnType<typeof useContractRead>) {
+function formatResult(
+  result: ReturnType<typeof useContractRead>,
+  formatter: (data: any) => any
+) {
   const { data, isFetched, error, isError, isSuccess, isFetching, isLoading } =
     result
 
   return {
-    data: data as any,
+    data: formatter(data),
     error,
     isError,
     isSuccess: isFetched && isSuccess,
@@ -88,4 +133,11 @@ const useResultTriggers = (
   useEffect(() => {
     if (error) onError?.(error)
   }, [isError])
+
+  return result
+}
+
+const useInternalAccount = (givenAccount?: string) => {
+  const { address: currentConneced } = useAccount()
+  return givenAccount || (currentConneced as any)
 }

@@ -13,9 +13,9 @@ export type DefaultFrescoAtomsConfig = {
   chainId?: number
 }
 
-export type FrescoReadConfig<DataType = any> = {
+export type FrescoReadConfig<DataType = any, ExtraProps = unknown> = {
   account?: `0x${string}`
-  token?: string
+  token?: `0x${string}`
   chainId?: number
   decimals?: number
   enabled?: boolean
@@ -31,4 +31,4 @@ export type FrescoReadConfig<DataType = any> = {
     isError: boolean
     error: Error | null
   }) => JSX.Element
-}
+} & ExtraProps
