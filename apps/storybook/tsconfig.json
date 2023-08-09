@@ -8,9 +8,10 @@
     "paths": {
       "@radish-la/fresco": ["../../packages/fresco/src/index.tsx"],
       "@radish-la/fresco/*": ["../../packages/fresco/src/*"],
+      "@/components/*": ["./components/*"],
       "@/config/*": ["./config/*"]
     }
   },
-  "include": ["stories", "./.storybook/*.tsx"],
+  "include": ["stories", "./.storybook/*.tsx", "components"],
   "exclude": [".turbo", "dist", "node_modules"]
 }

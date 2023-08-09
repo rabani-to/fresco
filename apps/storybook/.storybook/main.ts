@@ -24,6 +24,10 @@ const config: StorybookConfig = {
             replacement: resolve(__dirname, "../../../packages/fresco/src/"),
           },
           {
+            find: "@/components",
+            replacement: resolve(__dirname, "../components/"),
+          },
+          {
             find: "@/config",
             replacement: resolve(__dirname, "../config/"),
           },
