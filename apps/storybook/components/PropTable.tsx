@@ -29,13 +29,13 @@ function PropTable<DataType = unknown>({
   const DATA = props?.data
   const CONFIG = config || {}
   return (
-    <div className="[&_section]:flex [&_section]:gap-1 [&_section]:flex-col">
+    <div className="[&_section]:flex [&_section]:gap-2 [&_section]:flex-col font-medium text-[#363b3f] text-[0.9rem]">
       <section className="border-b pb-4 mb-4">
         {statuses.map((status) => {
           return (
-            <b key={`arg-${status}`}>
-              {status}: {prettifyProp(props[status])}
-            </b>
+            <div key={`arg-${status}`}>
+              {status} {prettifyProp(props[status])}
+            </div>
           )
         })}
       </section>
@@ -43,9 +43,9 @@ function PropTable<DataType = unknown>({
       <section className="border-b pb-4 mb-4">
         {other.map((key) => {
           return (
-            <b key={`arg-${key}`}>
-              {key}: {prettifyProp(props[key])}
-            </b>
+            <div key={`other-arg-${key}`}>
+              {key} {prettifyProp(props[key])}
+            </div>
           )
         })}
       </section>
@@ -55,9 +55,9 @@ function PropTable<DataType = unknown>({
           if (key.startsWith("on") || key === "children") return null
 
           return (
-            <b key={`arg-config-${key}`}>
-              {key}: {prettifyProp(CONFIG[key])}
-            </b>
+            <div key={`arg-config-${key}`}>
+              {key} {prettifyProp(CONFIG[key])}
+            </div>
           )
         })}
       </section>
@@ -65,9 +65,9 @@ function PropTable<DataType = unknown>({
       <section className={`${DATA || "hidden"}`}>
         {Object.keys(formatData?.(DATA || {}) || {}).map((key) => {
           return (
-            <b key={`arg-data-${key}`}>
-              {key}: {DATA ? prettifyProp(DATA[key]) : null}
-            </b>
+            <div key={`arg-data-${key}`}>
+              {key} {DATA ? prettifyProp(DATA[key]) : null}
+            </div>
           )
         })}
       </section>
@@ -82,9 +82,17 @@ const prettifyProp = (prop: any) => {
   if (prop === false) color = "text-[#ff4785]"
   if ([undefined, null, ""].includes(prop)) color = "text-[#7b858c]"
 
+  if (`${prop}`.includes("Error")) {
+    return (
+      <div className="text-red-600 font-semibold flex justify-center py-2 px-4 border border-[currentColor] rounded-2xl text-[86%]">
+        {String(prop === undefined || prop === "" ? `undefined` : prop)}
+      </div>
+    )
+  }
+
   return (
     <span
-      className={`${color} min-w-[2rem] inline-flex justify-center p-1 px-2 border rounded-full text-[85%]`}
+      className={`${color} ml-1 font-semibold min-w-[2rem] inline-flex justify-center py-0.5 px-2 border rounded-full text-[86%]`}
     >
       {String(prop === undefined || prop === "" ? `undefined` : prop)}
     </span>
