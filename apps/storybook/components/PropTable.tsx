@@ -29,49 +29,65 @@ function PropTable<DataType = unknown>({
   const DATA = props?.data
   const CONFIG = config || {}
   return (
-    <div>
-      <section className="flex flex-col border-b pb-4 mb-4">
+    <div className="[&_section]:flex [&_section]:gap-1 [&_section]:flex-col">
+      <section className="border-b pb-4 mb-4">
         {statuses.map((status) => {
           return (
             <b key={`arg-${status}`}>
-              {status}: {String(props[status])}
+              {status}: {prettifyProp(props[status])}
             </b>
           )
         })}
       </section>
 
-      <section className="flex flex-col border-b pb-4 mb-4">
+      <section className="border-b pb-4 mb-4">
         {other.map((key) => {
           return (
             <b key={`arg-${key}`}>
-              {key}: {String(props[key])}
+              {key}: {prettifyProp(props[key])}
             </b>
           )
         })}
       </section>
 
-      <section className="flex flex-col border-b pb-4 mb-4">
+      <section className="border-b pb-4 mb-4">
         {Object.keys(CONFIG).map((key) => {
           if (key.startsWith("on") || key === "children") return null
 
           return (
             <b key={`arg-config-${key}`}>
-              {key}: {String(CONFIG[key])}
+              {key}: {prettifyProp(CONFIG[key])}
             </b>
           )
         })}
       </section>
 
-      <section className={`flex flex-col ${DATA || "hidden"}`}>
+      <section className={`${DATA || "hidden"}`}>
         {Object.keys(formatData?.(DATA || {}) || {}).map((key) => {
           return (
             <b key={`arg-data-${key}`}>
-              {key}: {DATA ? String(DATA[key]) : null}
+              {key}: {DATA ? prettifyProp(DATA[key]) : null}
             </b>
           )
         })}
       </section>
     </div>
+  )
+}
+
+const prettifyProp = (prop: any) => {
+  let color = ""
+
+  if (prop === true) color = "text-[#029cfd]"
+  if (prop === false) color = "text-[#ff4785]"
+  if ([undefined, null, ""].includes(prop)) color = "text-[#7b858c]"
+
+  return (
+    <span
+      className={`${color} min-w-[2rem] inline-flex justify-center p-1 px-2 border rounded-full text-[85%]`}
+    >
+      {String(prop === undefined || prop === "" ? `undefined` : prop)}
+    </span>
   )
 }
 

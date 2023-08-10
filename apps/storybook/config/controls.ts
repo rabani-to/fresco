@@ -1,4 +1,4 @@
-import { arbitrum, optimism, polygon, mainnet } from "@wagmi/chains"
+import { arbitrum, optimism, polygon, mainnet, goerli } from "@wagmi/chains"
 
 export const chainSelector = {
   control: {
@@ -8,7 +8,8 @@ export const chainSelector = {
       [arbitrum.id]: "arbitrum",
       [polygon.id]: "polygon",
       [optimism.id]: "optimism",
+      [goerli.id]: "goerli-testnet",
     },
   },
-  options: [mainnet.id, arbitrum.id, polygon.id, optimism.id],
+  options: [mainnet.id, arbitrum.id, polygon.id, optimism.id, goerli.id],
 }

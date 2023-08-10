@@ -3,6 +3,7 @@ import { ERC20 } from "@radish-la/fresco/atoms"
 import PropTable from "@/components/PropTable"
 
 import { chainSelector } from "@/config/controls"
+import { mainnet } from "wagmi"
 
 const component = ERC20.BalanceOf
 type ComponentType = typeof component
@@ -10,6 +11,7 @@ export default {
   component,
   args: {
     token: "" as any,
+    chainId: mainnet.id,
   },
   argTypes: {
     chainId: chainSelector,

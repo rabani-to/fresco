@@ -1,9 +1,9 @@
 import { configureChains, createConfig, WagmiConfig } from "wagmi"
 import { publicProvider } from "wagmi/providers/public"
-import { arbitrum, optimism, polygon, mainnet } from "@wagmi/chains"
+import { arbitrum, optimism, polygon, mainnet, goerli } from "@wagmi/chains"
 
 const { publicClient } = configureChains(
-  [arbitrum, optimism, polygon, mainnet],
+  [arbitrum, optimism, polygon, mainnet, goerli],
   [publicProvider()]
 )
 
