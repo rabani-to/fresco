@@ -1,0 +1,46 @@
+import stories, { BalanceOf } from "./atoms/ERC20.BalanceOf.stories.tsx"
+import { Meta, Story, Canvas, ArgTypes } from "@storybook/addon-docs"
+import { mainnet } from "@wagmi/chains"
+
+<Meta title="Fresco/Home" component={BalanceOf.render} />
+
+# 👋 Welcome
+
+Fresco is not ready for production and it's still a work in progress.
+Yet, you can see our development storybook to playground what we are building 🤗.
+
+Here is the example of an `"atom"`. Think of this as React wrappers on wagmi for common **ERCs** (`ERC20, ERC721, ERC4626`).
+
+# BalanceOf(`vitalik.eth`)
+
+<Canvas>
+  <Story name="Example">
+    <BalanceOf.render
+      chainId={mainnet.id}
+      account="0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+    />
+  </Story>
+</Canvas>
+
+# Props
+
+```ts
+export type Props = {
+  account?: `0x${string}`
+  token?: `0x${string}`
+  chainId?: number
+  decimals?: number
+  enabled?: boolean
+  refetchInterval?: "block" | number
+  onChangeStatus?: (data: any) => void
+  onDataFetched?: (data: any) => void
+  onError?: (error: Error) => void
+  children: (prop: {
+    data: DataType
+    isSuccess: boolean
+    isLoading: boolean
+    isError: boolean
+    error: Error | null
+  }) => JSX.Element
+}
+```

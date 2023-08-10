@@ -13,3 +13,7 @@ b,
 strong {
   @apply font-semibold;
 }
+
+#storybook-docs p {
+  @apply !text-base;
+}
