@@ -15,5 +15,5 @@ strong {
 }
 
 #storybook-docs p {
-  @apply !text-base;
+  @apply !text-base sm:!text-[1.07rem];
 }

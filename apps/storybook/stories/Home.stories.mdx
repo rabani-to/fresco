@@ -4,14 +4,14 @@ import { mainnet } from "@wagmi/chains"
 
 <Meta title="Fresco/Home" component={BalanceOf.render} />
 
-# 👋 Welcome
+# 👋 Welcome to Fresco's Storybook
 
-Fresco is not ready for production and it's still a work in progress.
+Fresco is a component library and thriving Design System for Web3. Fresco is not ready for production and it's still a work in progress.
 Yet, you can see our development storybook to playground what we are building 🤗.
 
-Here is the example of an `"atom"`. Think of this as React wrappers on wagmi for common **ERCs** (`ERC20, ERC721, ERC4626`).
+Below you can apreciate the example of our so-called `"atoms"`. Think of this as React wrappers for commonly adopted [**Ethereum ERCs**](https://eips.ethereum.org/erc) (`primarily ERC20, ERC721, ERC4626`).
 
-# BalanceOf(`vitalik.eth`)
+# 👉 BalanceOf(`vitalik.eth`)
 
 <Canvas>
   <Story name="Example">
@@ -23,6 +23,9 @@ Here is the example of an `"atom"`. Think of this as React wrappers on wagmi for
 </Canvas>
 
 # Props
+
+Just as the wagmi team. We plan to keep a consistent naming for props across the atoms and each component's API.
+The following is a draft reference:
 
 ```ts
 export type Props = {
@@ -44,3 +47,8 @@ export type Props = {
   }) => JSX.Element
 }
 ```
+
+# Try it out
+
+Storybook is a frontend workshop for building UI components and pages in isolation.
+And you can manipulate component properties for this example as you wish [**in this section**](/story/atoms-erc20--balance-of).
